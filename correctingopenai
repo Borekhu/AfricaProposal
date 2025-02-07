@@ -1,0 +1,19 @@
+import openai
+
+# Set your OpenAI API key here
+openai.api_key = 
+def correct_typos(text):
+    response = openai.chat.completions.create(
+        model="gpt-4-turbo",  # Be sure to use the correct model name available to you
+            messages=[
+                {"role": "system", "content": "Please correct the text, removing incorrect spacing, and fixing typos."},
+                {"role": "user", "content": text}
+            ]
+    )
+    return response.choices[0].message.content
+    
+# Example usage
+text_with_typos = "Thsi is an exmaple sentnece with typos."
+corrected_text = correct_typos(text_with_typos)
+print("Original:", text_with_typos)
+print("Corrected:", corrected_text)
